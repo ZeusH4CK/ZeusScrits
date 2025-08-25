@@ -1,9 +1,24 @@
-getgenv().AutoSteal = true
+-- ZeusH4CK HUD con botón activador
+local ScreenGui = Instance.new("ScreenGui")
+local Button = Instance.new("TextButton")
 
+ScreenGui.Name = "ZeusHud"
+ScreenGui.Parent = game.CoreGui
+
+Button.Parent = ScreenGui
+Button.Size = UDim2.new(0, 200, 0, 50)
+Button.Position = UDim2.new(0.5, -100, 0.5, -25)
+Button.Text = "Activar AutoSteal"
+Button.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Button.TextColor3 = Color3.fromRGB(255, 255, 255)
+Button.Font = Enum.Font.SourceSansBold
+Button.TextSize = 20
+
+local AutoSteal = false
 local player = game.Players.LocalPlayer
 local char = player.Character or player.CharacterAdded:Wait()
-local brainName = "La Vaca Saturna Saturnita" -- ajusta si el objeto tiene otro nombre
-local basePosition = Vector3.new(0, 5, 0) -- cambia por la posición real de tu base
+local brainName = "La Vaca Saturna Saturnita"
+local basePosition = Vector3.new(0, 5, 0)
 
 function teleportTo(pos)
     if char and char:FindFirstChild("HumanoidRootPart") then
@@ -22,7 +37,13 @@ function stealBrain()
     end
 end
 
-while AutoSteal do
-    pcall(stealBrain)
-    task.wait(2)
-end
+Button.MouseButton1Click:Connect(function()
+    AutoSteal = not AutoSteal
+    Button.Text = AutoSteal and "AutoSteal ACTIVADO" or "Activar AutoSteal"
+    spawn(function()
+        while AutoSteal do
+            pcall(stealBrain)
+            task.wait(2)
+        end
+    end)
+end)
