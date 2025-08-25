@@ -2,7 +2,7 @@ getgenv().AutoSteal = true
 
 local player = game.Players.LocalPlayer
 local char = player.Character or player.CharacterAdded:Wait()
-local brainName = "Brain" -- ajusta si el objeto tiene otro nombre
+local brainName = "La Vaca Saturna Saturnita" -- ajusta si el objeto tiene otro nombre
 local basePosition = Vector3.new(0, 5, 0) -- cambia por la posición real de tu base
 
 function teleportTo(pos)
